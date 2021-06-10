@@ -1,7 +1,5 @@
 // TODO: Manejar timeout con promesas
-// TODO: cambiar imagen default
-// TODO: formato currency
-// TODO: Responsive
+// TODO: Ocultar URL
 // TODO: Subir repo
 // TODO: Hacer Github Pages
 // TODO: Generar QR
