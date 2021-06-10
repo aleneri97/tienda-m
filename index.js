@@ -1,25 +1,32 @@
-// TODO: Manejar timeout con promesas
 // TODO: Ocultar URL
 // TODO: Subir repo
 // TODO: Hacer Github Pages
 // TODO: Generar QR
 
-let url = 'https://api.sheety.co/a7ff2e700cac66745b92a39e8840a60b/onlineStoreExample/inventario';
-let inventario;
-fetch(url)
-    .then((response) => response.json())
-    .then(json => {
-        inventario = json.inventario;
-    });
+const SHEETY_API = 'https://api.sheety.co/a7ff2e700cac66745b92a39e8840a60b/onlineStoreExample/inventario';
 
-setTimeout(() => inventario.forEach(product => buildProductCard(product)), 2000)
-
+// Currency Format Entity
 var formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
 });
 
-const buildProductCard = product => {
+/**
+ * @description Function that process requests using asynchronously
+ * @param {*} url: url to request data
+ * @returns data response from the url
+ */
+async function fetchData(url) {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+}
+
+/**
+ * @description Function that manipulates DOM to create product nodes dynamically
+ * @param {*} product: each product will be created like this
+ */
+function buildProductCard(product){
     if (product.inventario > 0 ) {
         if(!product.imagen) product.imagen = './placeholder-image.png'
     
@@ -44,7 +51,6 @@ const buildProductCard = product => {
         p1.innerHTML = `${formatter.format(product.precio )}`;
         p2.innerHTML = product.descripcion;
         img.setAttribute("src", product.imagen);
-    
         card.setAttribute("class", "card mb-4 ");
         img.setAttribute("class", "card-img-top");
         cardBody.setAttribute("class", "card-body");
@@ -52,6 +58,11 @@ const buildProductCard = product => {
         p1.setAttribute("class", "card-text");
         p2.setAttribute("class", "card-text");
     }
-
 };
 
+// Executes data fetch and executes buildCardProduct function for each product
+fetchData(SHEETY_API).then(productos => {
+    productos.inventario.forEach(product => {
+        buildProductCard(product)
+    });
+})
