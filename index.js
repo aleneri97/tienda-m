@@ -62,7 +62,7 @@ function buildProductCard(product){
 };
 
 // Executes data fetch and executes buildCardProduct function for each product
-fetchData(SHEETY_API).then(productos => {
+fetchData(SHEET_BEST_API).then(productos => {
     productos.inventario.forEach(product => {
         buildProductCard(product)
     });
