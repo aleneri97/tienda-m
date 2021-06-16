@@ -49,7 +49,7 @@ function buildProductCard(product){
                 cardBody.append(p2);
         // Set content and attributes
         h5.innerHTML = product.nombre;
-        p1.innerHTML = `${formatter.format(product.precio )}`;
+        p1.innerHTML = `${product.precio}`;
         p2.innerHTML = product.descripcion;
         img.setAttribute("src", product.imagen);
         card.setAttribute("class", "card mb-4 ");
