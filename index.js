@@ -1,12 +1,14 @@
+/*
+ * @Author: aleneri97 
+ * @Date: 2021-06-19 18:12:25 
+ * @Last Modified by: aleneri97
+ * @Last Modified time: 2021-06-16 18:13:23
+ */
 // TODO: Ocultar URL
-// TODO: Subir repo
-// TODO: Hacer Github Pages
-// TODO: Generar QR
 
 const SHEETY_API = 'https://api.sheety.co/a7ff2e700cac66745b92a39e8840a60b/onlineStoreExample/inventario';
-const SHEET_BEST_API_MINE = 'https://sheet.best/api/sheets/5a3fbcf0-8ee0-4e62-b189-70e8876846cc';
-const SHEET_BEST_API = 'https://sheet.best/api/sheets/59a48816-efa2-440c-a1b8-8749a3b9cf8b';
-
+const SHEETBEST_API = 'https://sheet.best/api/sheets/5a3fbcf0-8ee0-4e62-b189-70e8876846cc';
+const SHEETBEST_API_SHARED = 'https://sheet.best/api/sheets/59a48816-efa2-440c-a1b8-8749a3b9cf8b';
 // Currency Format Entity
 var formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -50,10 +52,10 @@ function buildProductCard(product){
                 cardBody.append(p2);
         // Set content and attributes
         h5.innerHTML = product.nombre;
-        p1.innerHTML = `${product.precio}`;
+        p1.innerHTML = product.precio;
         p2.innerHTML = product.descripcion;
         img.setAttribute("src", product.imagen);
-        card.setAttribute("class", "card mb-4 ");
+        card.setAttribute("class", "card mb-4 mx-4");
         img.setAttribute("class", "card-img-top");
         cardBody.setAttribute("class", "card-body");
         h5.setAttribute("class", "card-title");
@@ -63,7 +65,7 @@ function buildProductCard(product){
 };
 
 // Executes data fetch and executes buildCardProduct function for each product
-fetchData(SHEET_BEST_API).then(productos => {
+fetchData(SHEETBEST_API_SHARED).then(productos => {
     productos.forEach(product => {
         buildProductCard(product)
     });
