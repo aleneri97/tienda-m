@@ -4,7 +4,8 @@
 // TODO: Generar QR
 
 const SHEETY_API = 'https://api.sheety.co/a7ff2e700cac66745b92a39e8840a60b/onlineStoreExample/inventario';
-const SHEET_BEST_API = 'https://sheet.best/api/sheets/5a3fbcf0-8ee0-4e62-b189-70e8876846cc';
+const SHEET_BEST_API_MINE = 'https://sheet.best/api/sheets/5a3fbcf0-8ee0-4e62-b189-70e8876846cc';
+const SHEET_BEST_API = 'https://sheet.best/api/sheets/59a48816-efa2-440c-a1b8-8749a3b9cf8b';
 
 // Currency Format Entity
 var formatter = new Intl.NumberFormat('en-US', {
