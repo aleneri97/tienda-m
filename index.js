@@ -2,7 +2,7 @@
  * @Author: aleneri97 
  * @Date: 2021-06-19 18:12:25 
  * @Last Modified by: aleneri97
- * @Last Modified time: 2021-06-17 10:04:45
+ * @Last Modified time: 2021-06-17 10:25:40
  */
 // TODO: Ocultar URL
 
@@ -137,9 +137,9 @@ function buildProductCard(product, carousel) {
         button.setAttribute("data-bs-target", "#exampleModal");
         button.onclick = function () {
             carousel.to(0);
-            if (!product.imagen2) product.imagen2 = './placeholder-image.png'
-            if (!product.imagen3) product.imagen3 = './placeholder-image.png'
-            if (!product.imagen4) product.imagen4 = './placeholder-image.png'
+            product.imagen2 = !product.imagen2 ? (product.tipo == 'reloj' ? './placeholder-watch-image.png' : './placeholder-image.png') : product.imagen2
+            product.imagen3 = !product.imagen3 ? (product.tipo == 'reloj' ? './placeholder-watch-image.png' : './placeholder-image.png') : product.imagen3
+            product.imagen4 = !product.imagen4 ? (product.tipo == 'reloj' ? './placeholder-watch-image.png' : './placeholder-image.png') : product.imagen4
             pic1.setAttribute("src", product.imagen);
             pic2.setAttribute("src", product.imagen2);
             pic3.setAttribute("src", product.imagen3);
