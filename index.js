@@ -2,7 +2,7 @@
  * @Author: aleneri97 
  * @Date: 2021-06-19 18:12:25 
  * @Last Modified by: aleneri97
- * @Last Modified time: 2021-06-16 19:34:11
+ * @Last Modified time: 2021-06-17 10:04:45
  */
 // TODO: Ocultar URL
 
@@ -71,6 +71,7 @@ let productos = [{
 const SHEETY_API = 'https://api.sheety.co/a7ff2e700cac66745b92a39e8840a60b/onlineStoreExample/inventario';
 const SHEETBEST_API = 'https://sheet.best/api/sheets/5a3fbcf0-8ee0-4e62-b189-70e8876846cc';
 const SHEETBEST_API_SHARED = 'https://sheet.best/api/sheets/59a48816-efa2-440c-a1b8-8749a3b9cf8b';
+
 // Currency Format Entity
 var formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -92,7 +93,7 @@ async function fetchData(url) {
  * @description Function that manipulates DOM to create product nodes dynamically
  * @param {*} product: each product will be created like this
  */
-function buildProductCard(product) {
+function buildProductCard(product, carousel) {
     if (product.inventario > 0) {
         if (!product.imagen) product.imagen = './placeholder-image.png'
 
@@ -103,6 +104,11 @@ function buildProductCard(product) {
         const h5 = document.createElement("h5");
         const p1 = document.createElement("p");
         const p2 = document.createElement("p");
+        const button = document.createElement("button");
+        const pic1 = document.getElementById("pic1");
+        const pic2 = document.getElementById("pic2");
+        const pic3 = document.getElementById("pic3");
+        const pic4 = document.getElementById("pic4");
 
         // Append newly created elements into the DOM
         const body = document.getElementById('content');
@@ -112,10 +118,12 @@ function buildProductCard(product) {
         cardBody.append(h5);
         cardBody.append(p1);
         cardBody.append(p2);
+        cardBody.append(button);
         // Set content and attributes
         h5.innerHTML = product.nombre;
         p1.innerHTML = product.precio;
         p2.innerHTML = product.descripcion;
+        button.innerHTML = 'Ver Fotos'
         img.setAttribute("src", product.imagen);
         card.setAttribute("class", "card mb-4 mx-4");
         img.setAttribute("class", "card-img-top");
@@ -123,12 +131,30 @@ function buildProductCard(product) {
         h5.setAttribute("class", "card-title");
         p1.setAttribute("class", "card-text text-primary font-weight-bold");
         p2.setAttribute("class", "card-text");
+        button.setAttribute("class", "btn btn-primary");
+        button.setAttribute("type", "button");
+        button.setAttribute("data-bs-toggle", "modal");
+        button.setAttribute("data-bs-target", "#exampleModal");
+        button.onclick = function () {
+            carousel.to(0);
+            if (!product.imagen2) product.imagen2 = './placeholder-image.png'
+            if (!product.imagen3) product.imagen3 = './placeholder-image.png'
+            if (!product.imagen4) product.imagen4 = './placeholder-image.png'
+            pic1.setAttribute("src", product.imagen);
+            pic2.setAttribute("src", product.imagen2);
+            pic3.setAttribute("src", product.imagen3);
+            pic4.setAttribute("src", product.imagen4);
+        };
+
     }
 };
+
+const myCarousel = document.querySelector('#carouselExampleIndicators')
+const carousel = new bootstrap.Carousel(myCarousel)
 
 // Executes data fetch and executes buildCardProduct function for each product
 fetchData(SHEETBEST_API_SHARED).then(productos => {
     productos.forEach(product => {
-        buildProductCard(product)
+        buildProductCard(product, carousel)
     });
 })
