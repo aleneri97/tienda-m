@@ -2,7 +2,7 @@
  * @Author: aleneri97 
  * @Date: 2021-06-19 18:12:25 
  * @Last Modified by: aleneri97
- * @Last Modified time: 2021-06-17 10:25:40
+ * @Last Modified time: 2021-06-30 12:12:42
  */
 // TODO: Ocultar URL
 
@@ -12,7 +12,7 @@ let productos = [{
         descripcion: "Solo una prueba",
         precio: '$1,000',
         inventario: 2,
-        imagen: "https://picsum.photos/400",
+        imagen1: "https://picsum.photos/400",
         imagen2: "https://picsum.photos/500",
         imagen3: ""
     },
@@ -22,7 +22,7 @@ let productos = [{
         descripcion: "Solo una prueba",
         precio: '$1,000',
         inventario: 2,
-        imagen: "https://picsum.photos/600",
+        imagen1: "https://picsum.photos/600",
         imagen2: "",
         imagen3: ""
     },
@@ -32,7 +32,7 @@ let productos = [{
         descripcion: "Solo una prueba",
         precio: '$1,000',
         inventario: 2,
-        imagen: "",
+        imagen1: "",
         imagen2: "",
         imagen3: ""
     },
@@ -42,7 +42,7 @@ let productos = [{
         descripcion: "Solo una prueba",
         precio: '$1,000',
         inventario: 2,
-        imagen: "https://picsum.photos/900",
+        imagen1: "https://picsum.photos/900",
         imagen2: "",
         imagen3: ""
     },
@@ -52,7 +52,7 @@ let productos = [{
         descripcion: "Solo una prueba",
         precio: '$1,000',
         inventario: 2,
-        imagen: "https://picsum.photos/1000",
+        imagen1: "https://picsum.photos/1000",
         imagen2: "",
         imagen3: ""
     },
@@ -62,7 +62,7 @@ let productos = [{
         descripcion: "Solo una prueba",
         precio: '$1,000',
         inventario: 2,
-        imagen: "https://picsum.photos/400",
+        imagen1: "https://picsum.photos/400",
         imagen2: "",
         imagen3: ""
     },
@@ -95,7 +95,7 @@ async function fetchData(url) {
  */
 function buildProductCard(product, carousel) {
     if (product.inventario > 0) {
-        if (!product.imagen) product.imagen = './placeholder-image.png'
+        if (!product.imagen1) product.imagen1 = './placeholder-image.png'
 
         // Create elements needed to build a card
         const card = document.createElement("div");
@@ -124,7 +124,7 @@ function buildProductCard(product, carousel) {
         p1.innerHTML = product.precio;
         p2.innerHTML = product.descripcion;
         button.innerHTML = 'Ver Fotos'
-        img.setAttribute("src", product.imagen);
+        img.setAttribute("src", product.imagen1);
         card.setAttribute("class", "card mb-4 mx-4");
         img.setAttribute("class", "card-img-top");
         cardBody.setAttribute("class", "card-body");
@@ -140,7 +140,7 @@ function buildProductCard(product, carousel) {
             product.imagen2 = !product.imagen2 ? (product.tipo == 'reloj' ? './placeholder-watch-image.png' : './placeholder-image.png') : product.imagen2
             product.imagen3 = !product.imagen3 ? (product.tipo == 'reloj' ? './placeholder-watch-image.png' : './placeholder-image.png') : product.imagen3
             product.imagen4 = !product.imagen4 ? (product.tipo == 'reloj' ? './placeholder-watch-image.png' : './placeholder-image.png') : product.imagen4
-            pic1.setAttribute("src", product.imagen);
+            pic1.setAttribute("src", product.imagen1);
             pic2.setAttribute("src", product.imagen2);
             pic3.setAttribute("src", product.imagen3);
             pic4.setAttribute("src", product.imagen4);
@@ -154,6 +154,7 @@ const carousel = new bootstrap.Carousel(myCarousel)
 
 // Executes data fetch and executes buildCardProduct function for each product
 fetchData(SHEETBEST_API_SHARED).then(productos => {
+    console.log(productos);
     productos.forEach(product => {
         buildProductCard(product, carousel)
     });
